@@ -5,7 +5,7 @@ pygame.init()
 screen = pygame.display.set_mode((900, 600))
 
 # 1. Caricare l'immagine di sfondo
-auto = pygame.image.load('Desktop/main.png').convert()
+auto = pygame.image.load('./img/main.png').convert()
 auto = pygame.transform.scale(auto,(450,600))
 
 # Game loop

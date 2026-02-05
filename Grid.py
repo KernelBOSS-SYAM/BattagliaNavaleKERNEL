@@ -1,7 +1,7 @@
 import pygame
 
 class Grid:
-    cell_dimension = 0
+    cell_dimension = 30
     num_width_cells = 0
     num_height_cells = 0
 
@@ -24,3 +24,7 @@ class Grid:
         for i in range(self.num_width_cells):
             for j in range(self.num_height_cells):
                 pygame.draw.rect(screen, color, (offset_x + i * self.cell_dimension, offset_y + j * self.cell_dimension, self.cell_dimension, self.cell_dimension), 1)
+
+    def get_cell_dimension(self):
+        return self.cell_dimension
+    

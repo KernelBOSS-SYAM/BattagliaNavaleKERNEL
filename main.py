@@ -1,5 +1,7 @@
 import pygame
 import Grid
+import Nave
+
 
 pygame.init()
 
@@ -14,9 +16,11 @@ radar = pygame.image.load('./img/radar.jpg').convert()
 radar = pygame.transform.scale(radar, (700, 800))
 
 #creo la griglia
-my_grid = Grid.Grid()
-enemy_grid = Grid.Grid()
+my_grid = Grid.Grid(40, 13, 13)
+enemy_grid = Grid.Grid(40, 13, 13)
 
+# Inserimento navi
+corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
 
 
 
@@ -27,8 +31,12 @@ while runnig:
         pygame.display.flip()
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
-        my_grid.draw_grid(screen, (0,0,255), offset_x = 155, offset_y = 100)
-        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 855, offset_y = 100)
+        my_grid.draw_grid(screen, (0,0,255), offset_x = 155, offset_y = 150)
+        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 855, offset_y = 150)
+        
+        corazzata.draw_nave(screen, offset_x = 155, offset_y = 150, cell_dimension=40)
+
+
 
 
 

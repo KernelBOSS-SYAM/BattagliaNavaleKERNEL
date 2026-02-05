@@ -1,61 +1,37 @@
 import pygame
-#COSTANTI
-CELL_SIZE = 30
-WIDTH = 13 * CELL_SIZE
-HEIGHT = 13 * CELL_SIZE
+import Grid
 
-
-# Inizializzazione
 pygame.init()
-screen = pygame.display.set_mode((1500, 800))
 
-# 1. Caricare l'immagine di sfondo
-img_sfondo = pygame.image.load('./img/main.png').convert()
-img_sfondo = pygame.transform.scale(img_sfondo,(500,700))
-screen.blit(img_sfondo, (0, 0))
-grid = [[-1 for _ in range(13)] for _ in range(13)]
-pygame.display.set_caption("Battaglia Navale")
-print(grid)
+screen = pygame.display.set_mode((1400, 800))
 
+#Sfondo griglia giocatore
+main = pygame.image.load('./img/main.png').convert()
+main = pygame.transform.scale(main, (700, 800))
 
+#Sfondo gliglia avversario
+radar = pygame.image.load('./img/radar.jpg').convert()
+radar = pygame.transform.scale(radar, (700, 800))
 
-def draw_grid():
-    for row in range(13):
-        for col in range(13):
-            rect = pygame.Rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE)
-            pygame.draw.rect(screen, (0, 0, 255), rect, 1)  # bordo blu
-
-draw_grid()
-imgC = pygame.image.load('./img/Corazzata.png')
-imgC = pygame.transform.scale(imgC, (150, 150))
-
-rectC = pygame.Rect(30, 30, 100, 100)
-rectC.bottomleft = (30, 200)
-screen.blit(imgC, rectC)
+#creo la griglia
+my_grid = Grid.Grid()
+enemy_grid = Grid.Grid()
 
 
 
 
-# Game loop
-running = True
-while running:
-
-    
-
-
+runnig = True
+while runnig:
     for event in pygame.event.get():
+
+        pygame.display.flip()
+        screen.blit(main, (0, 0))
+        screen.blit(radar, (700, 0))
+        my_grid.draw_grid(screen, (0,0,255), offset_x = 155, offset_y = 100)
+        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 855, offset_y = 100)
+
+
+
+
         if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            x, y = event.pos
-            col = x // CELL_SIZE
-            row = y // CELL_SIZE
-            
-            print("Cella:", row, col)
-        
-
-
-    # Aggiornare lo schermo
-    pygame.display.flip()
-
-pygame.quit()
+            runnig = False

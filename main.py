@@ -23,6 +23,7 @@ enemy_grid = Grid.Grid(40, 13, 13)
 corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
 incrociatore = Nave.Nave("incrociatore", "./img/incrociatore.png", 4)
 cacciatorpediniere = Nave.Nave("cacciatorpediniere", "./img/cacciatorpediniere.png", 4)
+portaerei = Nave.Nave("portaerei", "./img/portaAerei.png", 4)
 
 runnig = True
 while runnig:
@@ -34,10 +35,11 @@ while runnig:
         my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 170)
         enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 170)
         
-        corazzata.draw_nave(screen, offset_x = 50, offset_y = 700)
-        incrociatore.draw_nave(screen, offset_x = 150, offset_y = 700)
+        portaerei.draw_nave(screen, offset_x = 50, offset_y = 700)
+        corazzata.draw_nave(screen, offset_x = 150, offset_y = 700)
         incrociatore.draw_nave(screen, offset_x = 250, offset_y = 700)
-        cacciatorpediniere.draw_nave(screen, offset_x = 350, offset_y = 700)
+        incrociatore.draw_nave(screen, offset_x = 350, offset_y = 700)
+        cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
 
 
         if event.type == pygame.QUIT:

@@ -36,9 +36,9 @@ while runnig:
         my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 150)
         enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 150)
         
-        corazzata.draw_nave(screen, offset_x = 50, offset_y = 640, cell_dimension=40)
-        incrociatore.draw_nave(screen, offset_x = 100, offset_y = 640, cell_dimension=40)
-        cacciatorpediniere.draw_nave(screen, offset_x = 150, offset_y = 640, cell_dimension=40)
+        corazzata.draw_nave(screen, offset_x = 50, offset_y = 640)
+        incrociatore.draw_nave(screen, offset_x = 100, offset_y = 640)
+        cacciatorpediniere.draw_nave(screen, offset_x = 150, offset_y = 640)
 
         if event.type == pygame.QUIT:
             runnig = False

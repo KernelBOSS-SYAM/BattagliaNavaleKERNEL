@@ -31,8 +31,8 @@ while runnig:
         pygame.display.flip()
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
-        my_grid.draw_grid(screen, (0,0,255), offset_x = 155, offset_y = 150)
-        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 855, offset_y = 150)
+        my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 150)
+        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 150)
         
         corazzata.draw_nave(screen, offset_x = 155, offset_y = 150, cell_dimension=40)
 

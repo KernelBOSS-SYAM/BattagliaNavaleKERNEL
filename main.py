@@ -43,7 +43,8 @@ while runnig:
         cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
 
         corazzata.handle_event(event)
-        incrociatore.handle_event(event)
+        incrociatore1.handle_event(event)
+        incrociatore2.handle_event(event)
         cacciatorpediniere.handle_event(event)
         portaerei.handle_event(event)
 

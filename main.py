@@ -5,15 +5,15 @@ import Nave
 
 pygame.init()
 
-screen = pygame.display.set_mode((1400, 800))
+screen = pygame.display.set_mode((1400, 900))
 
 #Sfondo griglia giocatore
 main = pygame.image.load('./img/main.png').convert()
-main = pygame.transform.scale(main, (700, 800))
+main = pygame.transform.scale(main, (700, 900))
 
 #Sfondo gliglia avversario
 radar = pygame.image.load('./img/radar.jpg').convert()
-radar = pygame.transform.scale(radar, (700, 800))
+radar = pygame.transform.scale(radar, (700, 900))
 
 #creo la griglia
 my_grid = Grid.Grid(40, 13, 13)

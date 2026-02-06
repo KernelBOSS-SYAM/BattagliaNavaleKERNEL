@@ -21,7 +21,8 @@ enemy_grid = Grid.Grid(40, 13, 13)
 
 # Inserimento navi
 corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
-
+incrociatore = Nave.Nave("incrociatore", "./img/incrociatore.png", 4)
+cacciatorpediniere = Nave.Nave("cacciatorpediniere", "./img/cacciatorpediniere.png", 4)
 
 
 runnig = True
@@ -34,7 +35,9 @@ while runnig:
         my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 150)
         enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 150)
         
-        corazzata.draw_nave(screen, offset_x = 155, offset_y = 150, cell_dimension=40)
+        corazzata.draw_nave(screen, offset_x = 50, offset_y = 640, cell_dimension=40)
+        incrociatore.draw_nave(screen, offset_x = 100, offset_y = 640, cell_dimension=40)
+        cacciatorpediniere.draw_nave(screen, offset_x = 150, offset_y = 640, cell_dimension=40)
 
 
 

@@ -25,6 +25,7 @@ incrociatore = Nave.Nave("incrociatore", "./img/incrociatore.png", 4)
 cacciatorpediniere = Nave.Nave("cacciatorpediniere", "./img/cacciatorpediniere.png", 4)
 
 
+
 runnig = True
 while runnig:
     for event in pygame.event.get():
@@ -39,10 +40,7 @@ while runnig:
         incrociatore.draw_nave(screen, offset_x = 100, offset_y = 640, cell_dimension=40)
         cacciatorpediniere.draw_nave(screen, offset_x = 150, offset_y = 640, cell_dimension=40)
 
-
-
-
-
-
         if event.type == pygame.QUIT:
             runnig = False
+
+  

@@ -41,11 +41,14 @@ while runnig:
         incrociatore.draw_nave(screen, offset_x = 350, offset_y = 700)
         cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
 
+        corazzata.handle_event(event)
+        incrociatore.handle_event(event)
+        cacciatorpediniere.handle_event(event)
+        portaerei.handle_event(event)
 
         if event.type == pygame.QUIT:
             runnig = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(my_grid.get_pos_OnClick(event.pos[0], event.pos[1], offset_x = 90, offset_y = 170))
-
   

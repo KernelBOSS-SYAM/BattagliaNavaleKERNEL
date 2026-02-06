@@ -36,7 +36,7 @@ while runnig:
         my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 170)
         enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 170)
         
-        portaerei.draw_nave(screen, offset_x = 50, offset_y = 700)
+        portaerei.draw_nave(screen, offset_x = 50, offset_y = 670)
         corazzata.draw_nave(screen, offset_x = 150, offset_y = 700)
         incrociatore1.draw_nave(screen, offset_x = 250, offset_y = 700)
         incrociatore2.draw_nave(screen, offset_x = 350, offset_y = 700)

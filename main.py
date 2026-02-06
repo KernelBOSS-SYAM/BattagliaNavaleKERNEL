@@ -24,10 +24,6 @@ corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
 incrociatore = Nave.Nave("incrociatore", "./img/incrociatore.png", 4)
 cacciatorpediniere = Nave.Nave("cacciatorpediniere", "./img/cacciatorpediniere.png", 4)
 
-boxcorazzata = []
-boxcorazzata.append(corazzata)
-active_box = None
-
 runnig = True
 while runnig:
     for event in pygame.event.get():

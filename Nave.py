@@ -14,7 +14,7 @@ class Nave:
         self.rect = None
 
     def draw_nave(self, screen, offset_x, offset_y, rotation = 0):
-        img = pygame.image.load(self.path_img)
+        img = pygame.image.load(self.path_img).convert_alpha()
         img = pygame.transform.rotate(img, rotation)
 
         if self.rect is None:

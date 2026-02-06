@@ -21,7 +21,8 @@ enemy_grid = Grid.Grid(40, 13, 13)
 
 # Inserimento navi
 corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
-incrociatore = Nave.Nave("incrociatore", "./img/incrociatore.png", 4)
+incrociatore1 = Nave.Nave("incrociatore1", "./img/incrociatore.png", 4)
+incrociatore2 = Nave.Nave("incrociatore2", "./img/incrociatore.png", 4)
 cacciatorpediniere = Nave.Nave("cacciatorpediniere", "./img/cacciatorpediniere.png", 4)
 portaerei = Nave.Nave("portaerei", "./img/portaAerei.png", 4)
 
@@ -37,8 +38,8 @@ while runnig:
         
         portaerei.draw_nave(screen, offset_x = 50, offset_y = 700)
         corazzata.draw_nave(screen, offset_x = 150, offset_y = 700)
-        incrociatore.draw_nave(screen, offset_x = 250, offset_y = 700)
-        incrociatore.draw_nave(screen, offset_x = 350, offset_y = 700)
+        incrociatore1.draw_nave(screen, offset_x = 250, offset_y = 700)
+        incrociatore2.draw_nave(screen, offset_x = 350, offset_y = 700)
         cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
 
         corazzata.handle_event(event)
@@ -51,4 +52,5 @@ while runnig:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(my_grid.get_pos_OnClick(event.pos[0], event.pos[1], offset_x = 90, offset_y = 170))
+
   

@@ -14,5 +14,7 @@ class Nave:
     def draw_nave(self, screen, offset_x, offset_y, rotation = 0):
         img = pygame.image.load(self.path_img)
         img = pygame.transform.rotate(img, rotation)
+        img_rect = img.get_rect()
+        img_rect.topleft = (offset_x, offset_y)
         screen.blit(img, (offset_x, offset_y))
         

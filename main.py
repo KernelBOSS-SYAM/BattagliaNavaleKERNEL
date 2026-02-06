@@ -33,12 +33,12 @@ while runnig:
         pygame.display.flip()
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
-        my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 150)
-        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 150)
+        my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 170)
+        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 170)
         
-        corazzata.draw_nave(screen, offset_x = 50, offset_y = 640)
-        incrociatore.draw_nave(screen, offset_x = 100, offset_y = 640)
-        cacciatorpediniere.draw_nave(screen, offset_x = 150, offset_y = 640)
+        corazzata.draw_nave(screen, offset_x = 50, offset_y = 700)
+        incrociatore.draw_nave(screen, offset_x = 250, offset_y = 700)
+        cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
 
         if event.type == pygame.QUIT:
             runnig = False

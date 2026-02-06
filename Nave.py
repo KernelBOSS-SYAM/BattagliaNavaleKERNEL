@@ -11,9 +11,8 @@ class Nave:
         self.path_img = path_img
         self.dimesione = dimensione
 
-    def draw_nave(self, screen, offset_x, offset_y, cell_dimension=30):
+    def draw_nave(self, screen, offset_x, offset_y, rotation = 0):
         img = pygame.image.load(self.path_img)
-        img = pygame.transform.scale(img, (cell_dimension * self.dimesione, cell_dimension))
-        img = pygame.transform.rotate(img, 90)
+        img = pygame.transform.rotate(img, rotation)
         screen.blit(img, (offset_x, offset_y))
         

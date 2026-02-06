@@ -5,15 +5,15 @@ import Nave
 
 pygame.init()
 
-screen = pygame.display.set_mode((1400, 800))
+screen = pygame.display.set_mode((1400, 900))
 
 #Sfondo griglia giocatore
 main = pygame.image.load('./img/main.png').convert()
-main = pygame.transform.scale(main, (700, 800))
+main = pygame.transform.scale(main, (700, 900))
 
 #Sfondo gliglia avversario
 radar = pygame.image.load('./img/radar.jpg').convert()
-radar = pygame.transform.scale(radar, (700, 800))
+radar = pygame.transform.scale(radar, (700, 900))
 
 #creo la griglia
 my_grid = Grid.Grid(40, 13, 13)
@@ -31,10 +31,10 @@ while runnig:
         pygame.display.flip()
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
-        my_grid.draw_grid(screen, (0,0,255), offset_x = 155, offset_y = 150)
-        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 855, offset_y = 150)
+        my_grid.draw_grid(screen, (0,0,255), offset_x = 100, offset_y = 150)
+        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 800, offset_y = 150)
         
-        corazzata.draw_nave(screen, offset_x = 155, offset_y = 150, cell_dimension=40)
+        corazzata.draw_nave(screen, offset_x = 100, offset_y = 150, rotation = 90)
 
 
 

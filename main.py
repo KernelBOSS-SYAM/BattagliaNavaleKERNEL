@@ -45,4 +45,7 @@ while runnig:
         if event.type == pygame.QUIT:
             runnig = False
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(my_grid.get_pos_OnClick(event.pos[0], event.pos[1], offset_x = 90, offset_y = 170))
+
   

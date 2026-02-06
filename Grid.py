@@ -28,3 +28,12 @@ class Grid:
     def get_cell_dimension(self):
         return self.cell_dimension
     
+    def get_pos_OnClick (self, mouse_x, mouse_y, offset_x = 20, offset_y = 20):
+        cell_x = (mouse_x - offset_x) // self.cell_dimension
+        cell_y = (mouse_y - offset_y) // self.cell_dimension
+
+        if 0 <= cell_x < self.num_width_cells and 0 <= cell_y < self.num_height_cells:
+            return (cell_x, cell_y)
+    
+
+        

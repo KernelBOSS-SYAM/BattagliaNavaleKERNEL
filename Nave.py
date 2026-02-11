@@ -43,10 +43,11 @@ class Nave:
                 # Muove il rettangolo seguendo il mouse
                 self.rect.move_ip(event.rel)
         
-        
-    def rotazione (self, event, rotation):    #Problema da risolvere ruotano tutte le navi insieme, non riesco a far ruotare solo quella selezionata
+    def rotazione (self, event):    #Problema da risolvere ruotano tutte le navi insieme, non riesco a far ruotare solo quella selezionata
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_e:
-                self.rotation = min(self.rotation + 90, 90)
-            if event.key == pygame.K_r:
-                self.rotation = max(self.rotation - 90, 0)
+                if event.key == pygame.K_e:
+                    self.rotation += 90
+                if event.key == pygame.K_r:
+                        self.rotation -= 90
+            
+        self.rotation = max(0, min(90, self.rotation))

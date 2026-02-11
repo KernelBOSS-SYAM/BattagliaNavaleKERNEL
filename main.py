@@ -53,6 +53,8 @@ while runnig:
             runnig = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print(my_grid.get_pos_OnClick(event.pos[0], event.pos[1], offset_x = 90, offset_y = 170))
+            pos = my_grid.get_pos_OnClick(event.pos[0], event.pos[1], offset_x = 90, offset_y = 170)
+            if pos is not None:
+                print(f"Cliccato sulla cella: {pos}")
 
   

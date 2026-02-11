@@ -5,6 +5,7 @@ import Nave
 
 pygame.init()
 
+
 screen = pygame.display.set_mode((1400, 900))
 
 #Sfondo griglia giocatore
@@ -16,8 +17,8 @@ radar = pygame.image.load('./img/radar.jpg').convert()
 radar = pygame.transform.scale(radar, (700, 900))
 
 #creo la griglia
-my_grid = Grid.Grid(40, 13, 13)
-enemy_grid = Grid.Grid(40, 13, 13)
+my_grid = Grid.Grid(40, 13, 13, (59, 68, 255))
+enemy_grid = Grid.Grid(40, 13, 13, (0,255,0))
 
 # Inserimento navi
 corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
@@ -33,14 +34,14 @@ while runnig:
         pygame.display.flip()
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
-        my_grid.draw_grid(screen, (0,0,255), offset_x = 90, offset_y = 170)
-        enemy_grid.draw_grid(screen, (0, 255, 0), offset_x = 790, offset_y = 170)
+        my_grid.draw_grid(screen, offset_x = 90, offset_y = 170)
+        enemy_grid.draw_grid(screen, offset_x = 790, offset_y = 170)
         
-        portaerei.draw_nave(screen, offset_x = 50, offset_y = 670)
-        corazzata.draw_nave(screen, offset_x = 150, offset_y = 700)
-        incrociatore1.draw_nave(screen, offset_x = 250, offset_y = 700)
-        incrociatore2.draw_nave(screen, offset_x = 350, offset_y = 700)
-        cacciatorpediniere.draw_nave(screen, offset_x = 450, offset_y = 700)
+        portaerei.draw_nave(screen, pos_x = 50, pos_y = 670)
+        corazzata.draw_nave(screen, pos_x = 150, pos_y = 700)
+        incrociatore1.draw_nave(screen, pos_x = 250, pos_y = 700)
+        incrociatore2.draw_nave(screen, pos_x = 350, pos_y = 700)
+        cacciatorpediniere.draw_nave(screen, pos_x = 450, pos_y = 700)
 
         corazzata.handle_event(event)
         incrociatore1.handle_event(event)

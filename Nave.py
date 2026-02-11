@@ -15,13 +15,13 @@ class Nave:
         self.rect = None
         self.rotation = 0
 
-    def draw_nave(self, screen, offset_x, offset_y, rotation = 0):
+    def draw_nave(self, screen, pos_x, pos_y, rotation = 0):
         global img
         img = pygame.image.load(self.path_img).convert_alpha()
         img = pygame.transform.rotate(img, self.rotation)
 
         if self.rect is None:
-            self.rect = img.get_rect(topleft=(offset_x, offset_y))
+            self.rect = img.get_rect(topleft=(pos_x, pos_y))
         else:
             center = self.rect.center
             self.rect = img.get_rect(center=center)
@@ -43,7 +43,7 @@ class Nave:
                 # Muove il rettangolo seguendo il mouse
                 self.rect.move_ip(event.rel)
         
-    def rotazione (self, event):    #Problema da risolvere ruotano tutte le navi insieme, non riesco a far ruotare solo quella selezionata
+    def rotazione (self, event, rotation):    #Problema da risolvere ruotano tutte le navi insieme, non riesco a far ruotare solo quella selezionata
         if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_e:
                     self.rotation += 90

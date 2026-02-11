@@ -19,6 +19,10 @@ radar = pygame.transform.scale(radar, (700, 900))
 my_grid = Grid.Grid(40, 13, 13)
 enemy_grid = Grid.Grid(40, 13, 13)
 
+
+Nave.mygrid = my_grid
+
+
 # Inserimento navi
 corazzata = Nave.Nave("corazzata", "./img/corazzata.png", 4)
 incrociatore1 = Nave.Nave("incrociatore1", "./img/incrociatore.png", 4)

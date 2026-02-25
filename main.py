@@ -3,6 +3,16 @@ import Grid
 import Nave
 
 pygame.init()
+<<<<<<< Updated upstream
+=======
+
+green = (0,255,0) 
+blue = (59,68,255)
+cell_dimension = 40
+Ncell = 13
+
+
+>>>>>>> Stashed changes
 screen = pygame.display.set_mode((1400,900))
 
 # sfondi
@@ -51,6 +61,8 @@ while running:
     incrociatore2.draw_nave(screen, 350, 700)
     cacciatorpediniere.draw_nave(screen, 450, 700)
 
+    
+
     # Pulsante CONFERMA
     if ships_placed == 5 and not confirmed:
         pygame.draw.rect(screen, button_color, button_rect)
@@ -79,6 +91,7 @@ while running:
                             ships_placed += 1
 
 
+<<<<<<< Updated upstream
 
 
 
@@ -89,3 +102,6 @@ while running:
 pygame.quit()
 
   
+=======
+pygame.quit()
+>>>>>>> Stashed changes

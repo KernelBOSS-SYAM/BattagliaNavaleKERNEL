@@ -96,7 +96,10 @@ clock = pygame.time.Clock()
 def get_snap_cells(ship, col, row):
     size     = ship.dimesione
     rotation = ship_rotation[ship]
-    cells    = [(col + i, row) if rotation == 0 else (col, row + i) for i in range(size)]
+    # CORREZIONE: Se l'immagine è nativamente verticale, 
+    # rotation == 0 cambia le righe (row + i), 
+    # rotation == 90 cambia le colonne (col + i).
+    cells    = [(col, row + i) if rotation == 0 else (col + i, row) for i in range(size)]
     for c, r in cells:
         if not (0 <= c < COLS and 0 <= r < ROWS):
             return None
@@ -118,9 +121,14 @@ def ship_pixel_rect(ship, cells):
 def draw_ship_on_grid(ship, cells):
     rect = ship_pixel_rect(ship, cells)
     img  = pygame.image.load(ship.path_img).convert_alpha()
+    
+    # Applichiamo la rotazione
     img  = pygame.transform.rotate(img, ship_rotation[ship])
-    img  = pygame.transform.scale(img, (rect.width, rect.height))
-    screen.blit(img, rect.topleft)
+    
+    # CORREZIONE: Rimosso il pygame.transform.scale per mantenere la grandezza nativa.
+    # Centriamo l'immagine rispetto al blocco di celle calcolate.
+    img_rect = img.get_rect(center=rect.center)
+    screen.blit(img, img_rect.topleft)
 
 
 def draw_board_markers(board, offset_x, offset_y):

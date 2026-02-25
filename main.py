@@ -3,7 +3,6 @@ import Grid
 import Nave
 
 pygame.init()
-
 screen = pygame.display.set_mode((1400,900))
 
 # sfondi
@@ -16,7 +15,6 @@ radar_img = pygame.transform.scale(radar_img, (700,900))
 # griglie
 my_grid = Grid.Grid(40,13,13,(59,68,255))
 enemy_grid = Grid.Grid(40,13,13,(0,255,0))
-
 
 # navi
 

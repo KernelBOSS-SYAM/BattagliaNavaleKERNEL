@@ -63,23 +63,24 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+        # Click sul bottone
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if ships_placed == 5 and button_rect.collidepoint(event.pos):
+                confirmed = True
+                print("Posizionamento confermato!")
 
-        # gestione eventi navi
-        if portaerei.handle_event(event):
-            my_grid.place_ship(portaerei, 90, 170)
+        # Gestione navi solo se non confermato
+        if not confirmed:
+            for ship in ships:
+                if not ship.placed:
+                    if ship.handle_event(event):
+                        if my_grid.place_ship(ship, 90, 170):
+                            print(my_grid.grid_matrix)
+                            ships_placed += 1
 
-        if corazzata.handle_event(event):
-            my_grid.place_ship(corazzata, 90, 170)
 
-        if incrociatore1.handle_event(event):
-            my_grid.place_ship(incrociatore1, 90, 170)
 
-        if incrociatore2.handle_event(event):
-            my_grid.place_ship(incrociatore2, 90, 170)
 
-        if cacciatorpediniere.handle_event(event):
-            my_grid.place_ship(cacciatorpediniere, 90, 170)
-            print(my_grid.grid_matrix)
 
 
     pygame.display.flip()

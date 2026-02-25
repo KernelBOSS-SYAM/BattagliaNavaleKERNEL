@@ -79,7 +79,7 @@ class Grid:
         ship.rect.y = offset_y + cell_y * self.cell_dimension
 
         for (x, y) in positions:
-            self.grid_matrix[x][y] = 1
+            self.grid_matrix[x][y] = 0
 
         ship.grid_position = (cell_x, cell_y)
         ship.placed = True

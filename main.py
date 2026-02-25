@@ -3,16 +3,7 @@ import Grid
 import Nave
 
 pygame.init()
-<<<<<<< Updated upstream
 
-green = (0,255,0) 
-blue = (59,68,255)
-cell_dimension = 40
-Ncell = 13
-
-
-=======
->>>>>>> Stashed changes
 screen = pygame.display.set_mode((1400,900))
 
 # sfondi
@@ -23,8 +14,9 @@ radar_img = pygame.image.load('./img/radar.jpg').convert()
 radar_img = pygame.transform.scale(radar_img, (700,900))
 
 # griglie
-my_grid = Grid.Grid(cell_dimension,Ncell,Ncell,blue)
-enemy_grid = Grid.Grid(cell_dimension,Ncell,Ncell,green)
+my_grid = Grid.Grid(40,13,13,(59,68,255))
+enemy_grid = Grid.Grid(40,13,13,(0,255,0))
+
 
 # navi
 
@@ -73,44 +65,28 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Click sul bottone
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if ships_placed == 5 and button_rect.collidepoint(event.pos):
-                confirmed = True
-                print("Posizionamento confermato!")
 
-<<<<<<< Updated upstream
         # gestione eventi navi
-            if portaerei.handle_event(event):
-                my_grid.place_ship(portaerei, 90, 170)
+        if portaerei.handle_event(event):
+            my_grid.place_ship(portaerei, 90, 170)
 
-            if corazzata.handle_event(event):
-                my_grid.place_ship(corazzata, 90, 170)
+        if corazzata.handle_event(event):
+            my_grid.place_ship(corazzata, 90, 170)
 
-=======
-        # Gestione navi solo se non confermato
-        if not confirmed:
-            for ship in ships:
-                if not ship.placed:
-                    if ship.handle_event(event):
-                        if my_grid.place_ship(ship, 90, 170):
-                            ships_placed += 1
->>>>>>> Stashed changes
+        if incrociatore1.handle_event(event):
+            my_grid.place_ship(incrociatore1, 90, 170)
 
-            if incrociatore1.handle_event(event):
-                my_grid.place_ship(incrociatore1, 90, 170)
+        if incrociatore2.handle_event(event):
+            my_grid.place_ship(incrociatore2, 90, 170)
 
-<<<<<<< Updated upstream
-            if incrociatore2.handle_event(event):
-                my_grid.place_ship(incrociatore2, 90, 170)              
+        if cacciatorpediniere.handle_event(event):
+            my_grid.place_ship(cacciatorpediniere, 90, 170)
+            print(my_grid.grid_matrix)
 
-            if cacciatorpediniere.handle_event(event):
-                my_grid.place_ship(cacciatorpediniere, 90, 170)
-                print(my_grid.grid_matrix)
+
+    pygame.display.flip()
+
 
 pygame.quit()
 
   
-=======
-pygame.quit()
->>>>>>> Stashed changes

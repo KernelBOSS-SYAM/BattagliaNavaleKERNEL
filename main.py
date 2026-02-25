@@ -30,8 +30,8 @@ portaerei = Nave.Nave("portaerei", "./img/portaAerei.png", 4)
 runnig = True
 while runnig:
     for event in pygame.event.get():
-
         pygame.display.flip()
+        
         screen.blit(main, (0, 0))
         screen.blit(radar, (700, 0))
         my_grid.draw_grid(screen, offset_x = 90, offset_y = 170)

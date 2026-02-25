@@ -8,6 +8,9 @@ class Grid:
     num_width_cells = 0
     num_height_cells = 0
     color_grid = 0
+    grid_matrix = []
+
+
 
 
     # Inizializza la griglia con le dimensioni specificate
@@ -19,6 +22,7 @@ class Grid:
         self.num_width_cells = num_width_cells
         self.num_height_cells = num_height_cells
         self.color_grid = color_grid
+        self.grid_matrix = [[-1 for _ in range(num_height_cells)] for _ in range(num_width_cells)]
 
     # Disegna la griglia sullo schermo
     # screen: superficie di pygame su cui disegnare

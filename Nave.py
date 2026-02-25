@@ -1,53 +1,67 @@
-from cmath import rect
 import pygame
-import Grid
+
 
 class Nave:
-    nome = "Nave"
-    dimesione = 0
-    path_img = ""
 
     def __init__(self, nome, path_img, dimensione=2):
+
         self.nome = nome
         self.path_img = path_img
-        self.dimesione = dimensione
+        self.dimensione = dimensione
+
         self.dragging = False
-        self.rect = None
         self.rotation = 0
 
-    def draw_nave(self, screen, pos_x, pos_y, rotation = 0):
-        global img
-        img = pygame.image.load(self.path_img).convert_alpha()
-        img = pygame.transform.rotate(img, self.rotation)
+        self.rect = None
+        self.grid_position = None
+
+        self.image_original = pygame.image.load(path_img).convert_alpha()
+        self.image = self.image_original
+
+
+    def draw_nave(self, screen, pos_x, pos_y):
+
+        self.image = pygame.transform.rotate(self.image_original, self.rotation)
 
         if self.rect is None:
-            self.rect = img.get_rect(topleft=(pos_x, pos_y))
+            self.rect = self.image.get_rect(topleft=(pos_x, pos_y))
         else:
             center = self.rect.center
-            self.rect = img.get_rect(center=center)
+            self.rect = self.image.get_rect(center=center)
 
-        screen.blit(img, self.rect.topleft)
+        screen.blit(self.image, self.rect.topleft)
+
 
     def handle_event(self, event):
+
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(event.pos):
-                if event.button == 1: # Tasto sinistro
-                    self.dragging = True                           
+
+            if event.button == 1 and self.rect.collidepoint(event.pos):
+                self.dragging = True
+
 
         elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:
+
+            if event.button == 1 and self.dragging:
                 self.dragging = False
+                return True   # nave rilasciata
+
 
         elif event.type == pygame.MOUSEMOTION:
+
             if self.dragging:
-                # Muove il rettangolo seguendo il mouse
                 self.rect.move_ip(event.rel)
-        
-        if self.dragging and event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_e:
-                self.rotation += 90
-            elif event.key == pygame.K_r:
-                    self.rotation -= 90
-            
-            self.rotation = max(0, min(90, self.rotation))  
+
+
+        elif event.type == pygame.KEYDOWN:
+
+            if self.dragging:
+
+                if event.key == pygame.K_e:
+                    self.rotation = (self.rotation + 90) % 180
+
+                elif event.key == pygame.K_r:
+                    self.rotation = (self.rotation - 90) % 180
+
+        return False
                 

@@ -3,30 +3,31 @@ import random
 
 class AIOpponent:
     """
-    Hunt & Target AI for Sea Battle.
+    Hunt & Target AI for Battaglia Navale.
 
-    - HUNT mode : fires on a checkerboard pattern until a ship is hit
-    - TARGET mode: once a hit is found, attacks adjacent cells to sink it
+    Supports multi-shot turns as per documentation:
+    - Each turn the AI fires multiple shots (= its remaining un-hit ship cells)
+    - HUNT mode: checkerboard pattern until a hit
+    - TARGET mode: attacks adjacent cells after a hit to sink the ship
     """
 
-    GRID_COLS = 10
-    GRID_ROWS = 10
+    GRID_COLS = 13
+    GRID_ROWS = 13
 
-    # Ships: (name, size)
     SHIP_CONFIGS = [
-        ("portaerei",        5),
-        ("corazzata",        4),
-        ("incrociatore1",    3),
-        ("incrociatore2",    3),
-        ("cacciatorpediniere", 2),
+        ("portaerei",           5),
+        ("corazzata",           4),
+        ("incrociatore1",       3),
+        ("incrociatore2",       3),
+        ("cacciatorpediniere",  2),
     ]
 
     def __init__(self):
-        self.fired = set()
-        self.hits = set()
+        self.fired        = set()
+        self.hits         = set()
         self.target_queue = []
-        self.mode = "HUNT"
-        self.ship_cells = set()   # All cells occupied by AI ships
+        self.mode         = "HUNT"
+        self.ship_cells   = set()
         self._place_ships_randomly()
 
     # ------------------------------------------------------------------
@@ -36,18 +37,17 @@ class AIOpponent:
     def _place_ships_randomly(self):
         occupied = set()
         for name, size in self.SHIP_CONFIGS:
-            placed = False
-            attempts = 0
+            placed, attempts = False, 0
             while not placed and attempts < 1000:
                 attempts += 1
                 horizontal = random.choice([True, False])
                 if horizontal:
-                    col = random.randint(0, self.GRID_COLS - size)
-                    row = random.randint(0, self.GRID_ROWS - 1)
+                    col   = random.randint(0, self.GRID_COLS - size)
+                    row   = random.randint(0, self.GRID_ROWS - 1)
                     cells = [(col + i, row) for i in range(size)]
                 else:
-                    col = random.randint(0, self.GRID_COLS - 1)
-                    row = random.randint(0, self.GRID_ROWS - size)
+                    col   = random.randint(0, self.GRID_COLS - 1)
+                    row   = random.randint(0, self.GRID_ROWS - size)
                     cells = [(col, row + i) for i in range(size)]
 
                 if not any(c in occupied for c in cells):
@@ -60,11 +60,11 @@ class AIOpponent:
         return (col, row) in self.ship_cells
 
     # ------------------------------------------------------------------
-    # Firing logic (AI attacks the PLAYER)
+    # Single shot (called in a loop for multi-shot turns)
     # ------------------------------------------------------------------
 
     def fire(self):
-        """Return (col, row) for the AI's next shot at the player."""
+        """Return (col, row) for one shot. Call multiple times per turn."""
         if self.mode == "TARGET" and self.target_queue:
             cell = self.target_queue.pop(0)
             while cell in self.fired:
@@ -82,7 +82,7 @@ class AIOpponent:
 
     def report(self, cell, result):
         """
-        Tell the AI the result of its last shot.
+        Tell the AI the outcome of a shot.
         result: "miss", "hit", or "sunk"
         """
         if result == "hit":
@@ -93,13 +93,14 @@ class AIOpponent:
             self.hits.clear()
             self.target_queue.clear()
             self.mode = "HUNT"
-        # "miss" needs no extra handling
+        # "miss" needs no state change
 
     # ------------------------------------------------------------------
     # Internal helpers
     # ------------------------------------------------------------------
 
     def _hunt(self):
+        # Checkerboard pattern first (ships can't fit in single-cell gaps)
         candidates = [
             (c, r)
             for c in range(self.GRID_COLS)
@@ -116,23 +117,23 @@ class AIOpponent:
         return random.choice(candidates)
 
     def _enqueue_neighbors(self, cell):
-        col, row = cell
+        col, row   = cell
         directions = self._aligned_directions() if len(self.hits) > 1 else [(-1,0),(1,0),(0,-1),(0,1)]
         for dc, dr in directions:
-            neighbor = (col + dc, row + dr)
+            nb = (col + dc, row + dr)
             if (
-                0 <= neighbor[0] < self.GRID_COLS
-                and 0 <= neighbor[1] < self.GRID_ROWS
-                and neighbor not in self.fired
-                and neighbor not in self.target_queue
+                0 <= nb[0] < self.GRID_COLS
+                and 0 <= nb[1] < self.GRID_ROWS
+                and nb not in self.fired
+                and nb not in self.target_queue
             ):
-                self.target_queue.append(neighbor)
+                self.target_queue.append(nb)
 
     def _aligned_directions(self):
         cols = [c for c, r in self.hits]
         rows = [r for c, r in self.hits]
         if len(set(rows)) == 1:
-            return [(1, 0), (-1, 0)]   # Horizontal
+            return [(1, 0), (-1, 0)]
         if len(set(cols)) == 1:
-            return [(0, 1), (0, -1)]   # Vertical
+            return [(0, 1), (0, -1)]
         return [(-1,0),(1,0),(0,-1),(0,1)]

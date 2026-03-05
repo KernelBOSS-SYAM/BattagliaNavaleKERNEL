@@ -15,6 +15,17 @@ class Grid:
             for _ in range(num_width_cells)
         ]
 
+    def get_pos_OnClick(self, mouse_x, mouse_y, offset_x=20, offset_y=20):
+
+        cell_x = (mouse_x - offset_x) // self.cell_dimension
+        cell_y = (mouse_y - offset_y) // self.cell_dimension
+
+        if 0 <= cell_x < self.num_width_cells and 0 <= cell_y < self.num_height_cells:
+            return (cell_x, cell_y)
+
+        return None
+
+
     def draw_grid(self, screen, offset_x=20, offset_y=20):
 
         for i in range(self.num_width_cells):
@@ -85,3 +96,19 @@ class Grid:
         ship.placed = True
 
         return True
+
+    def spara(self, cell_x, cell_y):
+        #Colpito
+        if self.grid_matrix[cell_x][cell_y] == 0:
+            print("Colpito")
+            self.grid_matrix[cell_x][cell_y] = 1
+
+        #Gia colpito
+        if self.grid_matrix[cell_x][cell_y] == 1:
+            print("Gia colpito")
+            self.grid_matrix[cell_x][cell_y] = -2
+
+        #Acqua
+        if self.grid_matrix[cell_x][cell_y] == -1:
+            print("Acqua")
+            self.grid_matrix[cell_x][cell_y] = -2

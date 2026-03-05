@@ -3,8 +3,6 @@ import Grid
 import Nave
 
 pygame.init()
-<<<<<<< Updated upstream
-=======
 
 green = (0,255,0) 
 blue = (59,68,255)
@@ -12,7 +10,6 @@ cell_dimension = 40
 Ncell = 13
 
 
->>>>>>> Stashed changes
 screen = pygame.display.set_mode((1400,900))
 
 # sfondi
@@ -90,18 +87,10 @@ while running:
                             print(my_grid.grid_matrix)
                             ships_placed += 1
 
-
-<<<<<<< Updated upstream
-
-
-
-
-    pygame.display.flip()
-
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if ships_placed == 5 and confirmed:
+                coordinates = enemy_grid.get_pos_OnClick(event.pos[0], event.pos[1], 790, 170)
+                if coordinates is not None:
+                    enemy_grid.spara(coordinates[0], coordinates[1])
 
 pygame.quit()
-
-  
-=======
-pygame.quit()
->>>>>>> Stashed changes

@@ -73,7 +73,7 @@ while running:
             game_state = gh.handle_enemy_turn()
 
         elif game_state == "VALUTAZIONE_FASE":
-            game_state = gh.handle_enemy_turn()
+            game_state = gh.handle_evaluation(enemy_grid)
 
         # Click sul bottone
         

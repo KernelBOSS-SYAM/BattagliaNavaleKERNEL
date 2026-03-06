@@ -534,12 +534,17 @@ while running:
                 if not player_targets:
                     status_msg, status_color = "SELEZIONA ALMENO UN BERSAGLIO", C_AMBER
                 else:
+                    # FIX: calcola i colpi dell'AI PRIMA di risolvere il turno del
+                    # giocatore, così enemy_grid non è ancora aggiornata con i nuovi
+                    # colpi e il contatore riflette solo le celle già colpite nei
+                    # turni precedenti → l'AI riceve sempre 17 colpi a inizio turno.
+                    ai_shots = ai_shots_available()
                     player_won = resolve_player_volley()
                     player_targets.clear()
                     if player_won:
                         STATE, winner = "gameover", "Player"
                     else:
-                        ai_won = resolve_ai_volley(ai_shots_available())
+                        ai_won = resolve_ai_volley(ai_shots)
                         STATE  = "gameover" if ai_won else "analysis"
                         winner = "AI" if ai_won else ""
                         analysis_timer = now + ANALYSIS_DELAY

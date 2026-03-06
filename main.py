@@ -451,26 +451,28 @@ while running:
             running = False
             sys.exit()
 
-        # ── Toggle fullscreen ─────────────────────────────────────────
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_F11 or (
-                event.key == pygame.K_RETURN and event.mod & pygame.KMOD_ALT
-            ):
-                toggle_fullscreen()
-                continue  # salta il resto del processing per questo evento
-
         # ── Resize finestra ───────────────────────────────────────────
         if event.type == pygame.VIDEORESIZE and not fullscreen:
             screen, SCALE, OFF_X, OFF_Y = make_window(fullscreen)
+            continue
+
+        # ── Toggle fullscreen (F11 o ALT+INVIO) ──────────────────────
+        # IMPORTANTE: controllare ALT *prima* di passare K_RETURN al gioco
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_F11 or (
+                event.key == pygame.K_RETURN and bool(event.mod & pygame.KMOD_ALT)
+            ):
+                toggle_fullscreen()
+                continue  # non processare oltre
 
         # ── Converti coordinate mouse → canvas ───────────────────────
-        # Inietta una copia dell'evento con posizione scalata
-        if hasattr(event, 'pos'):
+        # Solo eventi mouse — MAI eventi tastiera (perderebbero key/mod)
+        MOUSE_EVENTS = (pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEMOTION)
+        if event.type in MOUSE_EVENTS:
             cx, cy = screen_to_canvas(event.pos)
-            # Ricrea evento con posizione canvas per tutti i controlli
-            event = pygame.event.Event(event.type, {
+            event  = pygame.event.Event(event.type, {
                 **{k: v for k, v in event.__dict__.items() if k != 'pos'},
-                'pos': (cx, cy)
+                'pos': (int(cx), int(cy))
             })
 
         # ── POSIZIONAMENTO ────────────────────────────────────────────

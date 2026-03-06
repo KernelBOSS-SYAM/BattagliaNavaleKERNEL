@@ -5,7 +5,8 @@ class Nave:
     def __init__(self, nome, path_img, dimensione=2):
 
         self.nome = nome
-        self.dimensione = dimensione
+        self.hp = dimensione
+        self.affondata = False
 
         self.dragging = False
         self.rotation = 0
@@ -55,3 +56,14 @@ class Nave:
                     self.rotation = (self.rotation - 90) % 180
 
         return False
+    
+    def take_hit(self):
+
+        self.hp -= 1
+
+        if self.hp <= 0:
+            self.affondata = True
+            print(self.nome, "AFFONDATA")
+            return "affondata"
+
+        return "colpita"

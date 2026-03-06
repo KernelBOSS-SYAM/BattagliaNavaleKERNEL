@@ -1,6 +1,9 @@
 import pygame
 import Nave
 
+player_shots = []
+
+
 #
 def load_backgrounds():
 
@@ -57,14 +60,76 @@ def handle_placement(event, ships, my_grid, ships_placed, confirmed, button_rect
                         ships_placed += 1
     return "PLAYER_TURN"
 
-def handle_player_turn(event, enemy_grid):
-    pos = None
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        pos = enemy_grid.get_pos_OnClick(event.pos[0], event.pos[1], 790, 170)
-        enemy_grid.spara(pos[0], pos[1])
-    return "VALUTAZIONE_FASE"# TEMPORANEAMENTE FASE DI VALUTAZIONE
+def handle_player_turn(event, enemy_grid, player_shots, max_shots):
 
-    
+    if event.type == pygame.MOUSEBUTTONDOWN:
+
+        pos = enemy_grid.get_pos_OnClick(
+            event.pos[0],
+            event.pos[1],
+            790,
+            170
+        )
+
+        if pos is not None:
+
+            if len(player_shots) < max_shots:
+
+                x, y = pos
+
+                if (x, y) not in player_shots:
+
+                    player_shots.append((x, y))
+
+                    print("Colpo registrato:", x, y)
+                    print("Colpi:", len(player_shots), "/", max_shots)
+
+            if len(player_shots) == max_shots:
+                return "EVALUATION"
+
+    return "PLAYER_TURN"
+
+def handle_evaluation(enemy_grid, player_shots):
+
+    while player_shots:
+
+        x, y = player_shots.pop(0)
+
+        cell = enemy_grid.grid_matrix[x][y]
+
+        # nave colpita
+        if cell != -1 and cell != -2:
+
+            ship = cell
+
+            result = ship.take_hit()
+
+            enemy_grid.grid_matrix[x][y] = 1
+
+            print("COLPITO")
+
+            if result == "affondata":
+                print("Nave affondata!")
+
+        # acqua
+        elif cell == -1:
+
+            enemy_grid.grid_matrix[x][y] = -2
+
+            print("ACQUA")
+
+    return "ENEMY_TURN"
+
 
 def handle_enemy_turn():
     return None
+
+def calcola_colpi_disponibili(ships):
+
+    totale = 0
+
+    for ship in ships:
+        if not ship.affondata:
+            totale += ship.hp
+
+    return totale

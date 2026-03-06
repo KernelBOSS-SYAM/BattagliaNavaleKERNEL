@@ -12,7 +12,7 @@ pygame.font.init()
 
 SCREEN_W, SCREEN_H = 1400, 900
 screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
-pygame.display.set_caption("Battaglia Navale")
+pygame.display.set_caption("Sea Battle")
 
 font_big   = pygame.font.SysFont("arial", 32, bold=True)
 font_med   = pygame.font.SysFont("arial", 22)
@@ -45,7 +45,7 @@ my_grid    = Grid.Grid(CELL, COLS, ROWS, (59, 68, 255))
 enemy_grid = Grid.Grid(CELL, COLS, ROWS, (0, 255, 0))
 
 # -----------------------------------------------------------------------
-# Player ships
+# Player ships  (same as original main.py)
 # -----------------------------------------------------------------------
 SHIP_DEFS = [
     ("portaerei",          "./img/portaAerei.png",        5),
@@ -119,11 +119,11 @@ def check_sunk(hits_set, all_ship_cells, ship_configs):
             c, r = cell
             for dc, dr in [(1,0),(-1,0),(0,1),(0,-1)]:
                 nb = (c+dc, r+dr)
-                if nb in hits_set and nb not in visited:
+                if nb in player_hits_on_ai and nb not in visited:
                     q.append(nb)
         return comp
 
-    for cell in hits_set:
+    for cell in player_hits_on_ai:
         if cell not in visited:
             components.append(bfs(cell))
 
@@ -247,7 +247,7 @@ while running:
             running = False
             sys.exit()
 
-        # ==== PLACEMENT ====
+        # ---- PLACEMENT ----
         if STATE == "placement":
             # Capture who is dragging BEFORE handle_event clears the flag
             was_dragging = {s for s in ships if s.dragging}
@@ -274,11 +274,9 @@ while running:
                 status_msg   = f"Turno 1 — Seleziona {player_shots_available()} bersagli e premi INVIO"
                 status_color = (100, 255, 100)
 
-        # ==== PLAYER SELECTING TARGETS ====
-        elif STATE == "player_selecting":
-            shots = player_shots_available()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
+        # ---- BATTLE — player fires ----
+        elif STATE == "battle":
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 cell = enemy_grid.get_pos_OnClick(
                     event.pos[0], event.pos[1],
                     offset_x=ENEMY_OFFSET_X, offset_y=ENEMY_OFFSET_Y
@@ -358,12 +356,12 @@ while running:
         draw_hud()
 
     # Status bar
-    pygame.draw.rect(screen, (20, 20, 20), (0, 860, SCREEN_W, 40))
-    screen.blit(font_med.render(status_msg, True, status_color), (20, 868))
+    pygame.draw.rect(screen, (20, 20, 20), (0, 850, SCREEN_W, 50))
+    screen.blit(font_med.render(status_msg, True, status_color), (20, 862))
 
-    # Panel labels
-    screen.blit(font_big.render("LA TUA FLOTTA", True, (59, 68, 255)), (MY_OFFSET_X,    MY_OFFSET_Y - 55))
-    screen.blit(font_big.render("RADAR NEMICO",  True, (0, 200, 0)),   (ENEMY_OFFSET_X, ENEMY_OFFSET_Y - 55))
+    # Labels
+    screen.blit(font_big.render("YOUR FLEET",  True, (59, 68, 255)), (MY_OFFSET_X,    MY_OFFSET_Y - 60))
+    screen.blit(font_big.render("ENEMY RADAR", True, (0, 200, 0)),   (ENEMY_OFFSET_X, ENEMY_OFFSET_Y - 60))
 
     if STATE == "placement":
         hint = font_small.render("Trascina le navi sulla griglia  |  R per ruotare", True, (180, 180, 180))
@@ -374,12 +372,12 @@ while running:
 
     if STATE == "gameover":
         overlay = pygame.Surface((SCREEN_W, SCREEN_H), pygame.SRCALPHA)
-        overlay.fill((0, 0, 0, 170))
+        overlay.fill((0, 0, 0, 160))
         screen.blit(overlay, (0, 0))
-        msg  = "HAI VINTO!" if winner == "Player" else "HA VINTO L'IA!"
+        msg  = "YOU WIN! 🎉" if winner == "Player" else "AI WINS! 💀"
         surf = font_big.render(msg, True, (255, 255, 100))
         screen.blit(surf, (SCREEN_W//2 - surf.get_width()//2, SCREEN_H//2 - 30))
-        sub  = font_med.render("Chiudi la finestra per uscire.", True, (200, 200, 200))
+        sub  = font_med.render("Close the window to exit.", True, (200, 200, 200))
         screen.blit(sub,  (SCREEN_W//2 - sub.get_width()//2,  SCREEN_H//2 + 30))
 
     pygame.display.flip()

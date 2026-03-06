@@ -73,6 +73,7 @@ while running:
             running = False
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if game_state == "PLACEMENT":
             game_state = gh.handle_placement(event, ships, my_grid, ships_placed, confirmed, button_rect)
 
@@ -86,6 +87,8 @@ while running:
         elif game_state == "VALUTAZIONE_FASE":
             game_state = gh.handle_evaluation(enemy_grid)
 
+=======
+>>>>>>> parent of 4fe7633 (Game fase)
 =======
 >>>>>>> parent of 4fe7633 (Game fase)
         # Click sul bottone

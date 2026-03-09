@@ -46,10 +46,10 @@ def draw_ships(screen, ships, start_x=50, start_y=700, spacing=100):
 
 def handle_placement(event, ships, my_grid, ships_placed, confirmed, button_rect):
     if event.type == pygame.MOUSEBUTTONDOWN:
-            if ships_placed == 5 and button_rect.collidepoint(event.pos):
-                confirmed = True
+        if ships_placed == 5 and button_rect.collidepoint(event.pos):
+            confirmed = True
         
-                print("Posizionamento confermato!")
+            print("Posizionamento confermato!")
 
         # Gestione navi solo se non confermato
     if not confirmed:

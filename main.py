@@ -65,15 +65,15 @@ while running:
         if game_state == "PLACEMENT":
             game_state = gh.handle_placement(event, ships, my_grid, ships_placed, confirmed, button_rect)
 
-        elif game_state == "PLAYER_TURN":
-            max_shots = gh.calcola_colpi_disponibili(ships)
-            game_state = gh.handle_player_turn(event, enemy_grid, max_shots)
+        #elif game_state == "PLAYER_TURN":
+            #max_shots = gh.calcola_colpi_disponibili(ships)
+            #game_state = gh.handle_player_turn(event, enemy_grid, max_shots)
 
-        elif game_state == "ENEMY_TURN":
-            game_state = gh.handle_enemy_turn()
+        #elif game_state == "ENEMY_TURN":
+            #game_state = gh.handle_enemy_turn()
 
-        elif game_state == "VALUTAZIONE_FASE":
-            game_state = gh.handle_evaluation(enemy_grid)
+        #elif game_state == "VALUTAZIONE_FASE":
+            #game_state = gh.handle_evaluation(enemy_grid)
 
         # Click sul bottone
         
